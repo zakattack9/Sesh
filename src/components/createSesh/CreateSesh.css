@@ -5,6 +5,8 @@
 
 #bkgSvg {
   position: absolute;
+  bottom: 0;
+  animation: slideUp 0.8s ease forwards;
 }
 
 .formWrapper {
@@ -114,4 +116,13 @@
   letter-spacing: 0;
   text-align: center;
   margin-top: 0.8em;
+}
+
+@keyframes slideUp {
+  0% {
+    bottom: -100%;
+  }
+  100% {
+    bottom: 0;
+  }
 }
