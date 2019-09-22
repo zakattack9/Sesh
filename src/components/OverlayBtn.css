@@ -23,6 +23,7 @@
   top: 0;
   right: 10px;
   color: #FF8B18;
+  z-index: 10;
 }
 
 #overlay a {

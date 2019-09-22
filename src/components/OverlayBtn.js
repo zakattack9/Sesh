@@ -1,9 +1,10 @@
 import React from 'react';
 import './OverlayBtn.css';
 import { Link } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 class OverlayBtn extends React.Component {
-  
+
   showOverlay = () => {
     document.getElementById('overlayBtn').style.animationName = 'fadeOut';
     document.getElementById('overlayBtn').style.animationPlayState = 'running';
@@ -24,13 +25,19 @@ class OverlayBtn extends React.Component {
         <div id="overlay">
           <div className="closeOverlay" onClick={this.closeOverlay}>&times;</div>
           <Link to='/'>
-            <div className="overlayOpt">Home</div>
+            <Fade top distance={'5px'} delay={0}>
+              <div className="overlayOpt">Home</div>
+            </Fade>
           </Link>
           <Link to='/pickLocation'>
-            <div className="overlayOpt">Create a Sesh</div>
+            <Fade top distance={'5px'} delay={150}>
+              <div className="overlayOpt">Create a Sesh</div>
+            </Fade>
           </Link>
           <Link to='/map'>
-            <div className="overlayOpt">Sesh Map</div>
+            <Fade top distance={'5px'} delay={300}>
+              <div className="overlayOpt">Sesh Map</div>
+            </Fade>
           </Link>
         </div>
         <div id="overlayBtn" onClick={this.showOverlay}>

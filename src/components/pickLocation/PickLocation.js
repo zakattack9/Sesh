@@ -2,6 +2,8 @@ import React from 'react';
 import './PickLocation.css';
 import { loadModules } from 'esri-loader';
 import { Redirect } from 'react-router-dom';
+import OverlayBtn from '../OverlayBtn';
+import Fade from 'react-reveal/Fade';
 
 class Map extends React.Component {
   state = { redirect: false, coords: null };
@@ -104,6 +106,7 @@ class Map extends React.Component {
 
     return (
       <div className="PickLocation">
+        <OverlayBtn></OverlayBtn>
         <svg id="bkgSvgDir" width="100%" height="20%" viewBox="0 0 360 10" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
           <defs>
             <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
@@ -116,10 +119,15 @@ class Map extends React.Component {
           </g>
         </svg>
 
-        <div className="directions">
-          Click on a location on the map to create a Sesh
+        <Fade bottom distance={'10px'} delay={0}>
+          <div className="directions">
+            Click on a location on the map to create a Sesh
         </div>
-        <div id="pickLocation"></div>
+        </Fade>
+
+        <Fade distance={'10px'} delay={700}>
+          <div id="pickLocation"></div>
+        </Fade>
       </div >
     );
   }

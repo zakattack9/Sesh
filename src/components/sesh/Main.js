@@ -1,16 +1,21 @@
 import React from 'react';
-import './Home.css';
 import OverlayBtn from '../OverlayBtn';
-import Sesh from './Sesh';
-import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareSquare } from '@fortawesome/free-solid-svg-icons';
+import './Main.css';
 import Fade from 'react-reveal/Fade';
 
-class Home extends React.Component {
+class Main extends React.Component {
+  state = {
+    sesh: this.props.location.state.sesh
+  }
+
   render() {
+    console.log(this.state.sesh);
     return (
-      <div className="Home">
+      <div className="Main">
         <OverlayBtn></OverlayBtn>
-        <svg className="seshLogo" width="80px" height="26px" viewBox="0 0 72 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+        <svg className="seshLogoMain" width="80px" height="26px" viewBox="0 0 72 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
           <defs>
             <linearGradient x1="50%" y1="30.6094819%" x2="50%" y2="100%" id="linearGradient-1">
               <stop stop-color="#FFA852" offset="0%"></stop>
@@ -28,100 +33,38 @@ class Home extends React.Component {
           </g >
         </svg >
 
-        <Fade bottom distance={'15px'} delay={0}>
-          <div className="homeTitle">
-            Ongoing Seshes
+        <div className="seshMainWrapper">
+          <Fade bottom distance={'10px'} delay={0}>
+            <div className="seshMainTitle" style={{ "color": this.state.sesh.color }}>{this.state.sesh.course}</div>
+            <div className="seshMainTime">{this.state.sesh.time}</div>
+            <div className="seshMainPeople">2 People</div>
+          </Fade>
+
+          <Fade bottom distance={'10px'} delay={100}>
+            <div className="subTitle">Location Details</div>
+            <div className="seshMainLocation">{this.state.sesh.locationDetails}</div>
+            <div className="subTitle">Sesh Objectives</div>
+            <div className="seshMainDetails">{this.state.sesh.seshDetails}</div>
+          </Fade>
+
+          <Fade bottom distance={'10px'} delay={170}>
+            <div className="filesTitle">Shared Sesh Files</div>
+          </Fade>
+          <Fade bottom distance={'10px'} delay={210}>
+            <div className="fileName">myNotes.docx</div>
+            <div className="fileName">lecture-slide1.pptx</div>
+            <div className="fileName">lecture-slide2.pptx</div>
+            <div className="fileName">apa_notes.txt</div>
+          </Fade>
+
+          <Fade bottom distance={'15px'} delay={250}>
+            <FontAwesomeIcon className="shareIcon" icon={faShareSquare} size="1x" />
+          </Fade>
         </div>
-        </Fade>
-        <Fade bottom distance={'10px'} delay={150}>
-          <div className="seshesWrapper">
-            <Sesh course="MAT267" time="12:00pm" count="6 People" class="ongoing" shadow="blue"></Sesh>
-            <Sesh course="ENG102" time="11:00pm" count="2 People" class="ongoing" shadow="blue"></Sesh>
-            <Sesh course="MAT243" time="12:00pm" count="3 People" class="ongoing" shadow="blue"></Sesh>
-            <Sesh course="CSE240" time="12:00pm" count="4 People" class="ongoing" shadow="blue"></Sesh>
-            <Sesh course="MAT267" time="12:00pm" count="0 People" class="ongoing" shadow="blue"></Sesh>
-          </div>
-        </Fade>
 
-        <Fade bottom distance={'15px'} delay={100}>
-          <div className="homeTitle">
-            Upcoming Seshes
-        </div>
-        </Fade>
-        <Fade bottom distance={'10px'} delay={300}>
-          <div className="seshesWrapper">
-            <Sesh course="CSE240" time="2:00pm" count="0 People" class="upcoming" shadow="blue"></Sesh>
-            <Sesh course="APA200" time="3:00pm" count="0 People" class="upcoming" shadow="blue"></Sesh>
-            <Sesh course="MAT243" time="1:00pm" count="0 People" class="upcoming" shadow="blue"></Sesh>
-            <Sesh course="MAT267" time="4:00pm" count="0 People" class="upcoming" shadow="blue"></Sesh>
-            <Sesh course="MAT267" time="1:00pm" count="0 People" class="upcoming" shadow="blue"></Sesh>
-          </div>
-        </Fade>
-
-        <Fade bottom distance={'15px'} delay={200}>
-          <div className="homeTitle">
-            Saved Seshes
-        </div>
-        </Fade>
-        <Fade bottom distance={'10px'} delay={450}>
-          <div className="seshesWrapper">
-            <Sesh course="ENG102" time="3:00pm" count="0 People" class="saved" shadow="orange"></Sesh>
-            <Sesh course="MAT267" time="5:00pm" count="0 People" class="saved" shadow="orange"></Sesh>
-            <Sesh course="CSE240" time="4:00pm" count="0 People" class="saved" shadow="orange"></Sesh>
-            <Sesh course="CSE240" time="1:00pm" count="0 People" class="saved" shadow="orange"></Sesh>
-            <Sesh course="MAT243" time="2:00pm" count="0 People" class="saved" shadow="orange"></Sesh>
-          </div>
-        </Fade>
-
-        <Link to="/pickLocation">
-          <svg className="createSesh" width="45px" height="45px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-            <defs>
-              <path d="M21.5,0 C33.3741221,0 43,9.62587788 43,21.5 C43,33.3741221 33.3741221,43 21.5,43 C9.62587788,43 0,33.3741221 0,21.5 C0,9.62587788 9.62587788,0 21.5,0 Z M21.5,4.03125 C11.8522758,4.03125 4.03125,11.8522758 4.03125,21.5 C4.03125,31.1477242 11.8522758,38.96875 21.5,38.96875 C31.1477242,38.96875 38.96875,31.1477242 38.96875,21.5 C38.96875,11.8522758 31.1477242,4.03125 21.5,4.03125 Z M19.9070375,22.375 C21.5013688,23.2903316 23.4982719,23.2905373 25.0929984,22.375 L25.734375,22.375 C27.1237187,22.375 28.25,23.4499238 28.25,24.7759146 L28.25,27.1768293 C28.25,27.6314596 27.8638516,28 27.3875,28 L17.6125,28 C17.1361484,28 16.75,27.6314596 16.75,27.1768293 L16.75,24.7759146 C16.75,23.4499238 17.8762812,22.375 19.265625,22.375 L19.9070375,22.375 Z M13.012107,22.375 C13.5700904,22.7675112 14.2054625,22.9440625 14.8333333,22.9054911 C14.7243077,23.2632143 14.6647272,23.6481585 14.6647272,24.0491071 L14.6647272,24.0491071 L14.6647272,26.125 L11.6871364,26.125 C11.3076367,26.125 11,25.7652344 11,25.3214286 L11,25.3214286 L11,24.25 C11,23.2144643 11.7178284,22.375 12.6033182,22.375 L12.6033182,22.375 Z M32.3966818,22.375 C33.2821716,22.375 34,23.2144643 34,24.25 L34,24.25 L34,25.3214286 C34,25.7652344 33.6923633,26.125 33.3128636,26.125 L33.3128636,26.125 L30.3352728,26.125 L30.3352728,24.0491071 C30.3355298,23.6594187 30.2784971,23.2725792 30.1666667,22.9054911 C30.7943944,22.9440625 31.4297378,22.7676451 31.987893,22.375 L31.987893,22.375 Z M15.7916667,16.75 C17.3794932,16.75 18.6666667,18.0091914 18.6666667,19.5625 C18.6666667,21.1158086 17.3794932,22.375 15.7916667,22.375 C14.2038401,22.375 12.9166667,21.1158086 12.9166667,19.5625 C12.9166667,18.0091914 14.2038401,16.75 15.7916667,16.75 Z M29.2083333,16.75 C30.7961599,16.75 32.0833333,18.0091914 32.0833333,19.5625 C32.0833333,21.1158086 30.7961599,22.375 29.2083333,22.375 C27.6205068,22.375 26.3333333,21.1158086 26.3333333,19.5625 C26.3333333,18.0091914 27.6205068,16.75 29.2083333,16.75 Z M22.5,13 C24.6170733,13 26.3333333,14.6789125 26.3333333,16.75 C26.3333333,18.8210875 24.6170733,20.5 22.5,20.5 C20.3829267,20.5 18.6666667,18.8210875 18.6666667,16.75 C18.6666667,14.6789125 20.3829267,13 22.5,13 Z" id="path-1"></path>
-              <filter x="-14.0%" y="-11.6%" width="132.6%" height="132.6%" filterUnits="objectBoundingBox" id="filter-2">
-                <feOffset dx="1" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-                <feColorMatrix values="0 0 0 0 0.127094656   0 0 0 0 0.127094656   0 0 0 0 0.127094656  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-              </filter>
-            </defs>
-            <g id="App" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <g id="Home-Copy-18" transform="translate(-291.000000, -564.000000)" fillRule="nonzero">
-                <g id="Group" transform="translate(294.000000, 566.000000)">
-                  <g id="Combined-Shape">
-                    <use fill="black" fillpacity="1" filter="url(#filter-2)" href="#path-1"></use>
-                    <use fill="#FFFFFF" href="#path-1"></use>
-                  </g>
-                </g>
-              </g>
-            </g>
-          </svg>
-        </Link>
-
-        <Fade bottom distance={'15px'} delay={300}>
-          <div className="bkgWrapper">
-            <svg className="seshBackground" width="100%" height="145px" viewBox="0 0 360 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-              <defs>
-                <linearGradient x1="50%" y1="26.3981763%" x2="50%" y2="111.053679%" id="linearGradient-1">
-                  <stop stop-color="#FFA852" offset="0%"></stop>
-                  <stop stop-color="#F73F27" offset="100%"></stop>
-                </linearGradient>
-              </defs>
-              <g id="App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="Home-Copy-18" transform="translate(0.000000, -518.000000)" fill="url(#linearGradient-1)">
-                  <path d="M2.84217094e-14,629.835893 C37.882743,644.721369 77.3293441,644.721369 118.339803,629.835893 C209,594.646455 300.216765,607.247366 360,629.835893 L360,518.07948 L2.84217094e-14,518.07948 L2.84217094e-14,629.835893 Z" id="Path-Copy" transform="translate(180.000000, 579.539740) scale(1, -1) translate(-180.000000, -579.539740) "></path>
-                </g>
-              </g>
-            </svg>
-          </div>
-        </Fade>
-
-        <Fade bottom distance={'15px'} delay={450}>
-          <div className="welcomeMsg">
-            Welcome back Zak, you have two upcoming Seshes at 2:00pm and 3:00pm.
-        </div>
-        </Fade>
-      </div >
+      </div>
     );
   }
 }
 
-export default Home;
+export default Main;

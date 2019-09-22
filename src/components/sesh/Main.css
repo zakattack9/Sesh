@@ -1,0 +1,64 @@
+.seshLogoMain {
+  padding: 10px 0 0 10px;
+  margin-left: 0.2em;
+  margin-bottom: 2em;
+}
+
+.seshMainWrapper {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  top: 9em;
+}
+
+.seshMainTitle {
+  font-family: Montserrat-Black;
+  font-size: 31px;
+  /* color: rgb(39, 39, 39); */
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.seshMainTime {
+  font-weight: 600;
+  font-size: 1.2em;
+  color: rgb(83, 83, 83);
+}
+
+.seshMainPeople {
+  font-size: 0.9em;
+  color: rgb(83, 83, 83);
+  margin-bottom: 1em;
+}
+
+.subTitle {
+  font-size: 0.8em;
+  color: rgb(124, 124, 124);
+}
+
+.seshMainLocation {
+  margin-bottom: 0.8em;
+  color: rgb(54, 54, 54);
+}
+
+.seshMainDetails {
+  color: rgb(54, 54, 54);
+}
+
+.filesTitle {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: rgb(107, 107, 107);
+  margin-top: 2em;
+}
+
+.fileName {
+  font-size: 0.9em;
+  color: rgb(99, 99, 99);
+  margin-top: 0.2em;
+}
+
+.shareIcon {
+  margin-top: 1.3em;
+  color: rgb(61, 61, 61);
+}

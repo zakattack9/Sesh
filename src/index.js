@@ -6,6 +6,7 @@ import App from './components/seshMap/App';
 import CreateSesh from './components/createSesh/CreateSesh';
 import Home from './components/home/Home';
 import PickLocation from './components/pickLocation/PickLocation';
+import Main from './components/sesh/Main';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/createSesh" component={CreateSesh} />
       <Route path="/map" component={App} />
       <Route path="/pickLocation" component={PickLocation} />
+      <Route path="/sesh" component={Main} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

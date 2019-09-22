@@ -1,0 +1,44 @@
+.seshLogo {
+  padding: 10px 0 0 10px;
+  margin-left: 0.5em;
+  margin-bottom: 2em;
+}
+
+.homeTitle {
+  font-family: Montserrat-Bold;
+  font-size: 1.3em;
+  color: #545454;
+  letter-spacing: 0;
+  padding-left: 0.8em;
+  margin-bottom: 0.9em;
+}
+
+.seshesWrapper {
+  padding-left: 1em;
+  margin-bottom: 1em;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.createSesh {
+  position: absolute;
+  z-index: 10;
+  bottom: 5em;
+  left: 1.5em;
+}
+
+.seshBackground {
+  position: relative;
+  bottom: -25px;
+  z-index: 1;
+}
+
+.welcomeMsg {
+  color: white;
+  position: absolute;
+  left: 1.5em;
+  bottom: 1.5em;
+  z-index: 5;
+  font-weight: 600;
+  width: 90%;
+}

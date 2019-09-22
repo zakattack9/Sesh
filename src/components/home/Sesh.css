@@ -1,0 +1,59 @@
+.ongoing {
+  background-image: linear-gradient(180deg, #3068ca 0%, #6550eb 98%);
+}
+
+.upcoming {
+  background-image: linear-gradient(183deg, rgb(34, 112, 248) 0%, rgb(241, 47, 96) 100%);
+}
+
+.saved {
+  background-image: linear-gradient(180deg, rgb(216, 33, 76) 0%, rgb(247, 175, 41) 79%);
+}
+
+.blue {
+  text-shadow: 5px 0 0 #4548a8;
+}
+
+.orange {
+  text-shadow: 5px 0 0 #B05150;
+}
+
+.Sesh {
+  width: 120px;
+  height: 105px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 1em;
+  position: relative;
+}
+
+.seshCourse {
+  font-family: Montserrat-Black;
+  font-size: 2.2em;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 0.8em;
+  width: 75%;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 0.2em;
+}
+
+.seshArrow {
+  position: absolute;
+  top: 50%;
+  right: 0.7em;
+  transform: translateY(-50%);
+}
+
+.seshCount {
+  font-weight: 600;
+  color: white;
+  padding-left: 0.3em;
+}
+
+.seshTime {
+  font-size: 0.8em;
+  color: white;
+  padding-left: 0.5em;
+}

@@ -3,6 +3,7 @@ import axios from 'axios';
 import './CreateSesh.css';
 import { Redirect } from 'react-router-dom';
 import OverlayBtn from '../OverlayBtn';
+import Fade from 'react-reveal/Fade';
 
 class CreateSesh extends React.Component {
   state = {
@@ -68,37 +69,51 @@ class CreateSesh extends React.Component {
         </svg>
 
         <div className="formWrapper">
-          <div className="formTitle">Create a Sesh</div>
-          <div className="formSubTitle">Open a Study Sesh once every 4 hours for each course</div>
+          <Fade bottom distance={'15px'} delay={0}>
+            <div className="formTitle">Create a Sesh</div>
+          </Fade>
+          <Fade bottom distance={'15px'} delay={100}>
+            <div className="formSubTitle">Open a Study Sesh once every 4 hours for each course</div>
+          </Fade>
 
           <form onSubmit={this.handleSubmit}>
-            <div id="optionSelectorWrapper">
-              <select className="courseSelector" name="course" defaultValue="" onChange={(e) => this.setState({ seshCourse: e.target.value })}>
-                <option value="" disabled>Select Course</option>
-                <option value="CSE240">CSE240</option>
-                <option value="MAT267">MAT267</option>
-                <option value="MAT243">MAT243</option>
-                <option value="ENG102">ENG102</option>
-                <option value="APA200">APA200</option>
-              </select>
+            <Fade bottom distance={'15px'} delay={200}>
+              <div id="optionSelectorWrapper">
+                <select className="courseSelector" name="course" defaultValue="" onChange={(e) => this.setState({ seshCourse: e.target.value })}>
+                  <option value="" disabled>Select Course</option>
+                  <option value="CSE240">CSE240</option>
+                  <option value="MAT267">MAT267</option>
+                  <option value="MAT243">MAT243</option>
+                  <option value="ENG102">ENG102</option>
+                  <option value="APA200">APA200</option>
+                </select>
 
-              <select className="timeSelector" name="time" defaultValue="" onChange={(e) => this.setState({ seshTime: e.target.value })}>
-                <option value="" disabled>Select Time</option>
-                <option value="12:00pm">12:00pm</option>
-                <option value="1:00pm">1:00pm</option>
-                <option value="2:00pm">2:00pm</option>
-                <option value="3:00pm">3:00pm</option>
-                <option value="4:00pm">4:00pm</option>
-              </select>
-            </div>
+                <select className="timeSelector" name="time" defaultValue="" onChange={(e) => this.setState({ seshTime: e.target.value })}>
+                  <option value="" disabled>Select Time</option>
+                  <option value="12:00pm">12:00pm</option>
+                  <option value="1:00pm">1:00pm</option>
+                  <option value="2:00pm">2:00pm</option>
+                  <option value="3:00pm">3:00pm</option>
+                  <option value="4:00pm">4:00pm</option>
+                </select>
+              </div>
+            </Fade>
 
-            <input className="selectLocation" type="text" placeholder="Select Location" value={this.state.coords} onChange={(e) => this.setState({ coords: this.state.coords })}></input>
-            <textarea name="locationDetails" className="locationDetails" cols="30" rows="5" placeholder="Additional location directions" onChange={(e) => this.setState({ locationDetails: e.target.value })}></textarea>
-            <textarea name="seshDetails" className="seshDetails" cols="30" rows="5" placeholder="Sesh objectives" onChange={(e) => this.setState({ seshDetails: e.target.value })}></textarea>
+            <Fade bottom distance={'15px'} delay={250}>
+              <input className="selectLocation" type="text" placeholder="Select Location" value={this.state.coords} onChange={(e) => this.setState({ coords: this.state.coords })}></input>
+            </Fade>
+            <Fade bottom distance={'15px'} delay={300}>
+              <textarea name="locationDetails" className="locationDetails" cols="30" rows="5" placeholder="Additional location directions" onChange={(e) => this.setState({ locationDetails: e.target.value })}></textarea>
+            </Fade>
+            <Fade bottom distance={'15px'} delay={350}>
+              <textarea name="seshDetails" className="seshDetails" cols="30" rows="5" placeholder="Sesh objectives" onChange={(e) => this.setState({ seshDetails: e.target.value })}></textarea>
+            </Fade>
             <div className="errorMsg">{this.state.errMsg}</div>
 
-            <input className="submitBtn" type="submit" value="Create Sesh"></input>
-            <div className="cancelBtn">Cancel</div>
+            <Fade bottom distance={'15px'} delay={500}>
+              <input className="submitBtn" type="submit" value="Create Sesh"></input>
+              <div className="cancelBtn">Cancel</div>
+            </Fade>
           </form>
 
         </div>

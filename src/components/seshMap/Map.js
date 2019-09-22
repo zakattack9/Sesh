@@ -4,6 +4,8 @@ import './Map.css';
 import LegendCourse from './LegendCourse';
 import { loadModules } from 'esri-loader';
 import OverlayBtn from '../OverlayBtn';
+import { Redirect } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 class Map extends React.Component {
   state = {
@@ -11,7 +13,8 @@ class Map extends React.Component {
     courses: ['MAT267', 'CSE240', 'MAT243', 'ENG102', 'APA200'],
     colors: ['#FFA852', '#FB3D24', '#4676CA', '#6528F1', '#32E3B0'],
     showSeshInfo: false,
-    selectedSesh: null
+    selectedSesh: null,
+    redirect: false
   }
 
   componentDidMount() {
@@ -50,14 +53,45 @@ class Map extends React.Component {
   }
 
   generateMap = (filter, navigate) => {
-    let showSeshInfo = (lat, lon) => {
+    let findSeshInfo = (lat, lon) => {
       let selectedSesh = this.state.seshes.find(sesh => {
         return Math.round(sesh.latitude * 1000) / 1000 === lat && Math.round(sesh.longitude * 1000) / 1000 === lon;
       });
       this.setState({ selectedSesh, showSeshInfo: true });
     }
 
-    loadModules(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Track", "esri/Graphic", "esri/tasks/support/FeatureSet", "esri/tasks/RouteTask", "esri/tasks/support/RouteParameters"])
+    let distanceCalc = (lat1, lon1, lat2, lon2, unit) => {
+      if ((lat1 === lat2) && (lon1 === lon2)) {
+        return 0;
+      }
+      else {
+        var radlat1 = Math.PI * lat1 / 180;
+        var radlat2 = Math.PI * lat2 / 180;
+        var theta = lon1 - lon2;
+        var radtheta = Math.PI * theta / 180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+          dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit === "K") { dist = dist * 1.609344 }
+        if (unit === "N") { dist = dist * 0.8684 }
+        return dist;
+      }
+    }
+
+    loadModules([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/Locate",
+      "esri/widgets/Track",
+      "esri/Graphic",
+      "esri/tasks/support/FeatureSet",
+      "esri/tasks/RouteTask",
+      "esri/tasks/support/RouteParameters",
+    ])
       .then(([Map, MapView, Locate, Track, Graphic, FeatureSet, RouteTask, RouteParameters]) => {
         var map = new Map({
           basemap: "streets"
@@ -95,7 +129,7 @@ class Map extends React.Component {
         });
         view.ui.add(track, "top-left");
         if (navigate) {
-          view.when(function() {
+          view.when(function () {
             track.start();
           });
         }
@@ -155,9 +189,9 @@ class Map extends React.Component {
                 });
                 routeParams.stops.features.push(curentPos);
 
-                routeTask.solve(routeParams).then(function(data) {
+                routeTask.solve(routeParams).then(function (data) {
                   // Display the route
-                  data.routeResults.forEach(function(result) {
+                  data.routeResults.forEach(function (result) {
                     result.route.symbol = {
                       type: "simple-line",
                       color: [5, 150, 255],
@@ -166,6 +200,9 @@ class Map extends React.Component {
                     view.graphics.add(result.route);
                   });
                 });
+
+                let feetDist = distanceCalc(navigate.latitude, navigate.longitude, trackEvent.position.coords.latitude, trackEvent.position.coords.longitude, "K") * 1000 / 0.3048;
+                console.log(feetDist);
               })
             }
           } else if (filter === undefined) {
@@ -181,7 +218,7 @@ class Map extends React.Component {
         view.on("click", function (event) {
           var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
           var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
-          showSeshInfo(lat, lon);
+          findSeshInfo(lat, lon);
         });
       })
       .catch(err => {
@@ -205,41 +242,63 @@ class Map extends React.Component {
     this.setState({ showSeshInfo: false });
   }
 
+  redirectToSesh = () => {
+    this.setState({ redirect: true });
+  }
+
   showSeshInfo() {
     if (this.state.showSeshInfo) {
       return (
         <div className="seshInfo">
-          <div id="seshCourse" style={{ "color": this.state.selectedSesh.color }}>{this.state.selectedSesh.course}</div>
-          <div id="seshTime">{this.state.selectedSesh.time}</div>
-          <div id="seshDetails">
-            <span id="seshDetailsTitle">Sesh Objectives:</span>
-            <br />
-            {this.state.selectedSesh.seshDetails}
-          </div>
-          <div id="seshLocationDet">
-            <span id="seshLocationTitle">Location Details:</span>
-            <br />
-            {this.state.selectedSesh.locationDetails}
-          </div>
+          <Fade bottom distance={'15px'} delay={0}>
+            <div id="seshCourse" onClick={this.redirectToSesh} style={{ "color": this.state.selectedSesh.color }}>{this.state.selectedSesh.course}</div>
+            <div id="seshTime">{this.state.selectedSesh.time}</div>
+          </Fade>
 
-          <div className="attendSeshBtn" onClick={this.startNavigation}>Attend Sesh</div>
-          <div className="closeBtn" onClick={this.closeSeshInfo}>Close</div>
+          <Fade bottom distance={'15px'} delay={100}>
+            <div id="seshDetails">
+              <span id="seshDetailsTitle">Sesh Objectives:</span>
+              <br />
+              {this.state.selectedSesh.seshDetails}
+            </div>
+            <div id="seshLocationDet">
+              <span id="seshLocationTitle">Location Details:</span>
+              <br />
+              {this.state.selectedSesh.locationDetails}
+            </div>
+          </Fade>
+          <Fade bottom distance={'15px'} delay={200}>
+            <div className="attendSeshBtn" onClick={this.startNavigation}>Attend Sesh</div>
+            <div className="closeBtn" onClick={this.closeSeshInfo}>Close</div>
+          </Fade>
         </div>
       )
     }
   }
 
   render() {
+    if (this.state.redirect) {
+      // this.props.history.push('/map');
+      return <Redirect to={{
+        pathname: '/sesh',
+        state: { sesh: this.state.selectedSesh }
+      }} />
+    }
+
     return (
       <div className="Map">
         <OverlayBtn></OverlayBtn>
         {this.showSeshInfo()}
-        <div className="legend">
-          {this.state.courses.map((course, i) => {
-            return <LegendCourse filterSeshes={this.filterSeshes} course={course} color={this.state.colors[i]}></LegendCourse>
-          })}
-        </div>
-        <div id="viewDiv"></div>
+        <Fade bottom distance={'15px'} delay={500}>
+          <div className="legend">
+            {this.state.courses.map((course, i) => {
+              return <LegendCourse filterSeshes={this.filterSeshes} course={course} color={this.state.colors[i]}></LegendCourse>
+            })}
+          </div>
+        </Fade>
+        <Fade distance={'15px'} delay={950}>
+          <div id="viewDiv"></div>
+        </Fade>
       </div>
     );
   }

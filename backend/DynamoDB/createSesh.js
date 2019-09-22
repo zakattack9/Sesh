@@ -25,6 +25,9 @@ module.exports.createSesh = (event, context, callback) => {
       "seshDetails": {
         S: seshDetails
       },
+      "people": {
+        S: "0"
+      },
     },
     TableName: "Sesh"
   };
