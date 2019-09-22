@@ -1,0 +1,91 @@
+.Map {
+  height: 100%;
+}
+
+#viewDiv {
+  width: 100%;
+  height: 100%;
+}
+
+.seshInfo {
+  width: 100%;
+  /* height: 40px; */
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  background-color: white;
+  text-align: left;
+  padding: 1em;
+  box-sizing: border-box;
+  color: #414141;
+  animation: slideDown 0.3s ease 1 forwards paused;
+  transition: 0.3s;
+}
+
+#seshCourse {
+  font-size: 1.3em;
+  font-weight: 900;
+  width: 50%;
+  display: inline-block;
+  margin-bottom: 0.4em;
+}
+
+#seshTime {
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+  font-weight: 600;
+  color: #636363;
+  font-size: 0.9em;
+}
+
+#seshDetailsTitle, #seshLocationTitle {
+  color: #636363;
+  font-size: 0.85em;
+}
+
+#seshDetails, #seshLocationDet {
+  font-size: 0.95em;
+  margin-bottom: 0.2em;
+}
+
+.attendSeshBtn {
+  font-size: 0.8em;
+  font-weight: 600;
+  text-align: center;
+  background-color: #FFA852;
+  color: white;
+  padding: 5px;
+  width: 30%;
+  border-radius: 15px;
+  /* margin: 0 auto; */
+  margin-top: 1.4em;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 1.4em;
+  bottom: 1.7em;
+  font-size: 0.8em;
+  font-style: italic;
+  text-align: right;
+  color: #FB3D24;
+}
+
+.legend {
+  font-size: 0.8em;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
+  padding-bottom: 1em;
+}
+
+@keyframes slideDown {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -132px;
+  }
+}

@@ -1,0 +1,83 @@
+.OverlayWrapper {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#overlay {
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  top: -130px;
+  z-index: 10;
+  padding: 1em 0;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-duration: 0.4s;
+}
+
+.closeOverlay {
+  font-size: 2.7em;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #FF8B18;
+}
+
+#overlay a {
+  text-decoration: none;
+  color: #4C4C4C;
+}
+
+.overlayOpt {
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+#overlayBtn {
+  position: absolute;
+  z-index: 5;
+  right: 10px;
+  top: 10px;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+@keyframes showOverlay {
+  0% {
+    top: -130px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes closeOverlay {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -130px;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
